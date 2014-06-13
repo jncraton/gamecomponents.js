@@ -18,12 +18,11 @@ class GameComponent
 
     strokePath: (points) ->
         @context.beginPath()
-        @context.moveTo(points[0][0], points[0][1])
-        
-        for point in points[1..]
-            @context.lineTo(point[0], point[1])
 
+        @context.moveTo(points[0][0], points[0][1])
+        @context.lineTo(point[0], point[1]) for point in points[1..]
         @context.lineTo(points[0][0], points[0][1])
+
         @context.stroke()
 
 (exports ? this).GameComponent = GameComponent
