@@ -1,9 +1,9 @@
 class CardSet extends GameComponent
     deck = [1,2,3]
     discard = []
-    hand = [1,2,3,4]
+    hand = [1,2,3,4,5,6,7,8,9,10]
     active = []
-    card_width = 200
+    card_width = 150
 
     paintCard: (x, y, text = '') ->
         x += 5
@@ -21,9 +21,9 @@ class CardSet extends GameComponent
     paint: (canvas_id) ->
         @getContext(canvas_id)
         
-        @paintCard(150,0, "Deck (" + deck.length + ')')
-        @paintCard(550,0, "Discard (" + discard.length + ')')
+        @paintCard(0,0, "Deck (" + deck.length + ')')
+        @paintCard(card_width + 10,0, "Discard (" + discard.length + ')')
 
         for card, i in hand
-            @paintCard((card_width + 10) * i,400, card)
+            @paintCard((card_width + 10) * (i % 5),300 + (card_width * 1.5 + 10) * Math.floor(i/5), card)
 (exports ? this).CardSet = CardSet
