@@ -5,7 +5,6 @@ board = new HexBoard(w, h, 1000, 1000)
 card_set = new CardSet()
 for i in [1..20]
     card_set.gain(i)
-card_set.paint('cards')
 
 console.log('total hexes', board.getHexes().length)
 
