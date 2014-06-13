@@ -4,8 +4,6 @@ class CardSet extends GameComponent
     hand = []
     active = []
 
-    constructor: (@x_res = 1000, @y_res = 1000) ->
-
     paintCard: (x, y, text = '') ->
         @strokePath([
             [x+5, y+5]
@@ -19,6 +17,6 @@ class CardSet extends GameComponent
     paint: (canvas_id) ->
         @getContext(canvas_id)
         
-        @paintCard(0,0, "Deck")
+        @paintCard(0,0, "Deck (" + deck.length + ')')
 
 (exports ? this).CardSet = CardSet
