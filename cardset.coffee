@@ -3,16 +3,20 @@ class CardSet extends GameComponent
     discard = []
     hand = [1,2,3,4]
     active = []
+    card_width = 200
 
     paintCard: (x, y, text = '') ->
+        x += 5
+        y += 5
+    
         @strokePath([
-            [x+5, y+5]
-            [x+5, y+305]
-            [x+205, y+305]
-            [x+205, y+5]
+            [x, y]
+            [x, y+card_width*1.5]
+            [x+card_width, y+card_width*1.5]
+            [x+card_width, y]
         ])
         
-        @context.fillText(text, x+100, y+100)
+        @context.fillText(text, x+card_width/2, y+card_width/2)
 
     paint: (canvas_id) ->
         @getContext(canvas_id)
@@ -21,5 +25,5 @@ class CardSet extends GameComponent
         @paintCard(550,0, "Discard (" + discard.length + ')')
 
         for card, i in hand
-            @paintCard(210 * i,400, card)
+            @paintCard((card_width + 10) * i,400, card)
 (exports ? this).CardSet = CardSet
