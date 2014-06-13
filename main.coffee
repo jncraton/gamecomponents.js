@@ -4,6 +4,7 @@ h = 9
 board = new HexBoard(w, h, 1000, 1000)
 card_set = new CardSet()
 card_set.paint('cards')
+card_set.shuffle()
 
 console.log('total hexes', board.getHexes().length)
 

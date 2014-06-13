@@ -5,18 +5,19 @@ class CardSet extends GameComponent
     active = []
     card_width = 150
     
+    shuffle: () ->
+        deck = deck.concat(discard).sort -> 
+            Math.random() - Math.random()
+        discard = []
+    
     discard: (pos) ->
         if hand[pos]
             discard.push(hand.splice(pos, 1))
 
     draw: () ->
-        # Shuffle if we are out of cards
         if deck.length == 0
-            deck = deck.concat(discard).sort -> 
-                Math.random() - Math.random()
-            discard = []
-        
-        # Move a card from deck to hand
+            @shuffle()
+            
         if deck.length > 0
             hand.push(deck.pop())
 
