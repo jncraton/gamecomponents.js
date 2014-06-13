@@ -43,7 +43,7 @@ class HexBoard extends GameComponent
         hex_radius = Math.min(x_radius - (.25 * x_radius / @width), 
                               y_radius - (0.86602540378 * y_radius / @width)) - 1
         
-        @forEachHex (hex) ->
+        for hex in @getHexes()
             sin30 = .5 * hex_radius
             cos30 = 0.86602540378 * hex_radius
             
@@ -52,19 +52,14 @@ class HexBoard extends GameComponent
                 hex_radius + cos30 * 2 * hex.y + cos30 * (hex.x % 2)
             ]
             
-            verts = [
+            @strokePath([
                 [center[0] - sin30, center[1] - cos30]
                 [center[0] + sin30, center[1] - cos30]
                 [center[0] + hex_radius, center[1]]
                 [center[0] + sin30, center[1] + cos30]
                 [center[0] - sin30, center[1] + cos30]
                 [center[0] - hex_radius, center[1]]
-            ]
-            
-            context.beginPath()
-            context.moveTo(verts[0][0], verts[0][1])
-            context.lineTo(vert[0], vert[1]) for vert in verts
-            context.lineTo(verts[0][0], verts[0][1])
+            ])
             
             context.fillStyle = hex.fill or "gray"
             context.fill()
