@@ -23,7 +23,7 @@ setStart(w-1,0,'blue')
 setStart(w-1,h-1,'brown')
 
 doTurn = (color) ->
-    setTimeout(() -> 
+    timer = setTimeout(() -> 
         doTurn(players[turn % 4])
         turn += 1
         board.draw('board')
@@ -49,7 +49,8 @@ doTurn = (color) ->
                             hex.textColor = 'white'
                             hex.note = 'HAZ'
                         return
-                        
+        
+        clearTimeout(timer)
         console.log('no move for ' + color)
 
 doTurn()
