@@ -31,6 +31,7 @@ doTurn = (color) ->
         
         card_set.draw()
         card_set.discard(Math.floor(Math.random() * 10))
+        card_set.discard(Math.floor(Math.random() * 10))
         card_set.paint('cards')
     , 500)
 
