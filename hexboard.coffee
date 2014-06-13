@@ -35,7 +35,7 @@ class HexBoard extends GameComponent
 
         return ret
     
-    draw: (canvas_id) ->
+    paint: (canvas_id) ->
         context = @getContext(canvas_id)
         
         x_radius = (@x_res) / ( @width * 1.5)

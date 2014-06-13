@@ -3,7 +3,7 @@ h = 9
 
 board = new HexBoard(w, h, 1000, 1000)
 card_set = new CardSet()
-card_set.draw('cards')
+card_set.paint('cards')
 
 console.log('total hexes', board.getHexes().length)
 
@@ -26,7 +26,7 @@ doTurn = (color) ->
     timer = setTimeout(() -> 
         doTurn(players[turn % 4])
         turn += 1
-        board.draw('board')
+        board.paint('board')
     , 20)
 
     if (color)

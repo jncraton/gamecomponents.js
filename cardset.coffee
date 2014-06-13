@@ -6,7 +6,7 @@ class CardSet extends GameComponent
 
     constructor: (@x_res = 1000, @y_res = 1000) ->
 
-    draw: (canvas_id) ->
+    paint: (canvas_id) ->
         context = @getContext(canvas_id)
 
         context.beginPath()
