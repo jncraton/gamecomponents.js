@@ -3,8 +3,9 @@ h = 9
 
 board = new HexBoard(w, h, 1000, 1000)
 card_set = new CardSet()
+for i in [1..20]
+    card_set.gain(i)
 card_set.paint('cards')
-card_set.shuffle()
 
 console.log('total hexes', board.getHexes().length)
 
@@ -33,7 +34,7 @@ doTurn = (color) ->
         card_set.discard(Math.floor(Math.random() * 10))
         card_set.discard(Math.floor(Math.random() * 10))
         card_set.paint('cards')
-    , 500)
+    , 20)
 
     if (color)
         hexes = board.getHexes().sort (a, b) ->
