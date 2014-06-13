@@ -27,7 +27,10 @@ doTurn = (color) ->
         doTurn(players[turn % 4])
         turn += 1
         board.paint('board')
-    , 20)
+        
+        card_set.draw()
+        card_set.paint('cards')
+    , 500)
 
     if (color)
         hexes = board.getHexes().sort (a, b) ->

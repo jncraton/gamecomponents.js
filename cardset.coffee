@@ -1,9 +1,20 @@
 class CardSet extends GameComponent
-    deck = [1,2,3]
+    deck = [1,2,3,4,5,6,7,8,9,10]
     discard = []
-    hand = [1,2,3,4,5,6,7,8,9,10]
+    hand = []
     active = []
     card_width = 150
+    
+    draw: () ->
+        # Shuffle if we are out of cards
+        if deck.length == 0
+            deck = deck.concat(discard).sort -> 
+                Math.random() - Math.random()
+            discard.empty()
+        
+        # Move a card from deck to hand
+        if deck.length > 0
+            hand.push(deck.pop())
 
     paintCard: (x, y, text = '') ->
         x += 5
