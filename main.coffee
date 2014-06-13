@@ -1,7 +1,9 @@
 w = 9
 h = 9
 
-board = new HexBoard(w, h, 2000, 1000)
+board = new HexBoard(w, h, 1000, 1000)
+card_set = new CardSet()
+card_set.draw('cards')
 
 console.log('total hexes', board.getHexes().length)
 
