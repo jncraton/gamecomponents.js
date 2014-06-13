@@ -3,17 +3,17 @@ class GameComponent
 
     getContext: (canvas_id) ->
         canvas = document.getElementById(canvas_id)
-        context = canvas.getContext('2d')
+        @context = canvas.getContext('2d')
         canvas.width = @x_res
         canvas.height = @y_res
-        context.clearRect(0, 0, canvas.width, canvas.height);
+        @context.clearRect(0, 0, canvas.width, canvas.height);
         
-        context.font = 'normal 20pt Sans'
-        context.textAlign = 'center'
-        context.textBaseline = 'middle'
-        context.strokeStyle = "black"
-        context.lineWidth = 5
+        @context.font = 'normal 20pt Sans'
+        @context.textAlign = 'center'
+        @context.textBaseline = 'middle'
+        @context.strokeStyle = "black"
+        @context.lineWidth = 5
         
-        return context
+        return @context
 
 (exports ? this).GameComponent = GameComponent
