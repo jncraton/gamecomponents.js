@@ -7,13 +7,12 @@ class CardSet extends GameComponent
     constructor: (@x_res = 1000, @y_res = 1000) ->
 
     paintCard: (x, y, text = '') ->
-        @context.beginPath()
-        @context.moveTo(x+5, y+5)
-        @context.lineTo(x+5, y+305)
-        @context.lineTo(x+205, y+305)
-        @context.lineTo(x+205, y+5)
-        @context.lineTo(x+5, y+5)
-        @context.stroke()
+        @strokePath([
+            [x+5, y+5]
+            [x+5, y+305]
+            [x+205, y+305]
+            [x+205, y+5]
+        ])
         
         @context.fillText(text, 100, 100)
 
