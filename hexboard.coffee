@@ -1,4 +1,4 @@
-class HexBoard
+class HexBoard extends GameComponent
     hexes = []
 
     constructor: (@width, @height, @x_res = 2000, @y_res = 2000) ->
@@ -36,18 +36,10 @@ class HexBoard
         return ret
     
     draw: (canvas_id) ->
-        canvas = document.getElementById(canvas_id)
-        context = canvas.getContext('2d')
-        canvas.width = @x_res
-        canvas.height = @y_res
-        context.clearRect(0, 0, canvas.width, canvas.height);
+        context = @getContext(canvas_id)
         
-        context.font = 'normal 20pt Sans'
-        context.textAlign = 'center'
-        context.textBaseline = 'middle'
-        
-        x_radius = (canvas.width) / ( @width * 1.5)
-        y_radius = (canvas.height) / ( @height * 2.0 * 0.86602540378)
+        x_radius = (@x_res) / ( @width * 1.5)
+        y_radius = (@y_res) / ( @height * 2.0 * 0.86602540378)
         hex_radius = Math.min(x_radius - (.25 * x_radius / @width), 
                               y_radius - (0.86602540378 * y_radius / @width)) - 1
         
@@ -69,7 +61,6 @@ class HexBoard
                 [center[0] - hex_radius, center[1]]
             ]
             
-            context.lineWidth = 5;
             context.beginPath()
             context.moveTo(verts[0][0], verts[0][1])
             context.lineTo(vert[0], vert[1]) for vert in verts
