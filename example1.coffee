@@ -58,7 +58,20 @@ doTurn = (player) ->
             player.prod_deck.paint('cards')
     , 20)
 
+    end_turn = () ->
+        player.prod_deck.discard(0)
+        player.prod_deck.discard(0)
+        player.prod_deck.discard(0)
+        player.prod_deck.draw()
+        player.prod_deck.draw()
+        player.prod_deck.draw()
+
+
     if (player)
+        console.log('Starting turn for ' + player.color)
+        console.log('Hand:')
+        for card in player.prod_deck.hand
+            console.log('    ' + card.name)
         # Try exploring
         explorer = player.prod_deck.getHandCardByName('Explorer')
         solar_array = player.prod_deck.getHandCardByName('Solar Array')
@@ -73,9 +86,17 @@ doTurn = (player) ->
                     for hex in board.getAdjacent(hex)
                         if (!hex.fill) 
                             hex.fill = player.color
+                            if (hex.note == 'MAT')
+                                player.prod_deck.gain({name: 'Salvager'})
+                            if (hex.note == 'POP')
+                                player.prod_deck.gain({name: 'Explorer'})
+                            if (!hex.note)
+                                player.prod_deck.gain({name: 'Solar Array'})
+                            end_turn()
                             return
         
-        clearTimeout(timer)
+        #clearTimeout(timer)
+        end_turn()
         console.log('no move for ' + player.color)
 
 doTurn()
