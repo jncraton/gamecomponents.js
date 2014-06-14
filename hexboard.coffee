@@ -62,9 +62,9 @@ class HexBoard extends GameComponent
         context = @getContext(canvas_id)
         
         x_radius = (@x_res) / ( @width * 1.5)
-        y_radius = (@y_res) / ( @height * 2.0 * 0.86602540378)
+        y_radius = (@y_res) / ( @height * 2.0 * COS30)
         hex_radius = Math.min(x_radius - (.25 * x_radius / @width), 
-                              y_radius - (0.86602540378 * y_radius / @width)) - 1
+                              y_radius - (COS30 * y_radius / @width)) - 1
         
         for hex in @getHexes()
             x_offset = SIN30 * hex_radius
