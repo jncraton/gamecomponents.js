@@ -1,6 +1,9 @@
 class HexBoard extends GameComponent
     hexes = []
     hex_radius = 0
+    
+    SIN30 = .5
+    COS30 = 0.86602540378
 
     constructor: (@width, @height, @x_res = 1000, @y_res = 1000) ->
         hexes = (({'x': x, 'y': y} for y in [0...@height-x%2]) for x in [0...@width])
@@ -9,12 +12,9 @@ class HexBoard extends GameComponent
         [].concat.apply([], hexes)
 
     calculateCenterPoint: (hex) ->
-        sin30 = .5 * hex_radius
-        cos30 = 0.86602540378 * hex_radius
-
         return [
-            hex_radius + (sin30 + hex_radius) * hex.x
-            hex_radius + cos30 * 2 * hex.y + cos30 * (hex.x % 2)
+            hex_radius + (SIN30 * hex_radius + hex_radius) * hex.x
+            hex_radius + COS30 * hex_radius * 2 * hex.y + COS30 * hex_radius * (hex.x % 2)
         ]
     
     click: (e) ->
@@ -67,17 +67,17 @@ class HexBoard extends GameComponent
                               y_radius - (0.86602540378 * y_radius / @width)) - 1
         
         for hex in @getHexes()
-            sin30 = .5 * hex_radius
-            cos30 = 0.86602540378 * hex_radius
+            x_offset = SIN30 * hex_radius
+            y_offset = COS30 * hex_radius
             
             center = @calculateCenterPoint(hex)
             
             @strokePath([
-                [center[0] - sin30, center[1] - cos30]
-                [center[0] + sin30, center[1] - cos30]
+                [center[0] - x_offset, center[1] - y_offset]
+                [center[0] + x_offset, center[1] - y_offset]
                 [center[0] + hex_radius, center[1]]
-                [center[0] + sin30, center[1] + cos30]
-                [center[0] - sin30, center[1] + cos30]
+                [center[0] + x_offset, center[1] + y_offset]
+                [center[0] - x_offset, center[1] + y_offset]
                 [center[0] - hex_radius, center[1]]
             ])
             
