@@ -1,6 +1,6 @@
 class GameComponent
     constructor: (@x_res = 1000, @y_res = 1000) ->
-
+    
     getContext: (canvas_id) ->
         canvas = document.getElementById(canvas_id)
         @context = canvas.getContext('2d')
@@ -13,6 +13,9 @@ class GameComponent
         @context.textBaseline = 'middle'
         @context.strokeStyle = "black"
         @context.lineWidth = 5
+        
+        if (@click)
+            canvas.addEventListener('click', @click)
         
         return @context
 

@@ -4,6 +4,18 @@ class CardSet extends GameComponent
     hand = []
     active = []
     card_width = 150
+    handlers = {}
+    
+    click: (e) ->
+        x = e.offsetX
+        y = e.offsetY
+        
+        x = x / (card_width + 10)
+        y = (y - 300) / ((card_width * 1.5 + 10))
+        console.log(x, y)
+    
+    event: (name, cb) ->
+        handlers[name] = cb
     
     gain: (card) ->
         discard.push(card)
