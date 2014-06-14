@@ -4,5 +4,5 @@
 %.js: %.litcoffee
 	coffee -c $^
 
-web.js: gamecomponent.js hexboard.js cardset.js main.js
+example1_web.js: gamecomponent.js hexboard.js cardset.js example1.js
 	cat $^ > $@
