@@ -13,6 +13,11 @@ card_set.addEventListener('cardActivated', (card) ->
     card_set.paint('cards')
 )
 
+board.addEventListener('hexActivated', (hex) ->
+    hex.fill = 'gray'
+    board.paint('board')
+)
+
 console.log('total hexes', board.getHexes().length)
 
 players = ['red', 'green', 'blue', 'brown']
