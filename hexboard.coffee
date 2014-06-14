@@ -1,15 +1,43 @@
 class HexBoard extends GameComponent
     hexes = []
+    hex_radius = 0
 
     constructor: (@width, @height, @x_res = 1000, @y_res = 1000) ->
         hexes = (({'x': x, 'y': y} for y in [0...@height-x%2]) for x in [0...@width])
-    
-    forEachHex: (cb) ->
-        ((cb(hexes[x][y]) for y in [0...@height-x%2]) for x in [0...@width])
-        
+
     getHexes: () ->
         [].concat.apply([], hexes)
 
+    calculateCenterPoint: (hex) ->
+        sin30 = .5 * hex_radius
+        cos30 = 0.86602540378 * hex_radius
+
+        return [
+            hex_radius + (sin30 + hex_radius) * hex.x
+            hex_radius + cos30 * 2 * hex.y + cos30 * (hex.x % 2)
+        ]
+    
+    click: (e) ->
+        #TODO: this could use optimization
+        best_hex = hexes[0][0]
+        
+        for hex in @getHexes()
+            best_center = @calculateCenterPoint(best_hex)
+            center = @calculateCenterPoint(hex)
+        
+            best_dist = Math.sqrt((best_center[0]-e.cx)**2 + (best_center[1]-e.cy)**2)
+            dist = Math.sqrt((center[0]-e.cx)**2 + (center[1]-e.cy)**2)
+            
+            console.log(best_dist, dist, hex)
+            
+            if dist < best_dist
+                best_hex = hex
+        
+        @trigger('hexActivated', best_hex)
+
+    forEachHex: (cb) ->
+        ((cb(hexes[x][y]) for y in [0...@height-x%2]) for x in [0...@width])
+        
     getHex: (x,y) ->
         hexes[x][y]
 
@@ -34,7 +62,7 @@ class HexBoard extends GameComponent
         push(x-1, y + 1 + (-2) * ((x + 1) % 2))
 
         return ret
-    
+        
     paint: (canvas_id) ->
         context = @getContext(canvas_id)
         
@@ -47,10 +75,7 @@ class HexBoard extends GameComponent
             sin30 = .5 * hex_radius
             cos30 = 0.86602540378 * hex_radius
             
-            center = [
-                hex_radius + (sin30 + hex_radius) * hex.x
-                hex_radius + cos30 * 2 * hex.y + cos30 * (hex.x % 2)
-            ]
+            center = @calculateCenterPoint(hex)
             
             @strokePath([
                 [center[0] - sin30, center[1] - cos30]
