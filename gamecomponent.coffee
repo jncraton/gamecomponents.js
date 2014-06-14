@@ -11,22 +11,24 @@ class GameComponent
             handlers[event_name](arg)
     
     getContext: (canvas_id) ->
-        canvas = document.getElementById(canvas_id)
-        @context = canvas.getContext('2d')
-        canvas.width = @x_res
-        canvas.height = @y_res
-        @context.clearRect(0, 0, canvas.width, canvas.height);
+        if @canvasId != canvas_id
+            @canvasId = canvas_id
+
+            canvas = document.getElementById(canvas_id)
+            canvas.width = @x_res
+            canvas.height = @y_res
+            @context = canvas.getContext('2d')
+            @context.font = 'normal 20pt Sans'
+            @context.textAlign = 'center'
+            @context.textBaseline = 'middle'
+            @context.strokeStyle = "black"
+            @context.lineWidth = 5
+            
+            if (@click)
+                canvas.addEventListener('click', @click.bind(this))
         
-        @context.font = 'normal 20pt Sans'
-        @context.textAlign = 'center'
-        @context.textBaseline = 'middle'
-        @context.strokeStyle = "black"
-        @context.lineWidth = 5
-        
-        if (@click)
-            canvas.removeEventListener(@click)
-            canvas.addEventListener('click', @click.bind(this))
-        
+        @context.clearRect(0, 0, @x_res, @y_res);
+            
         return @context
 
     strokePath: (points) ->
