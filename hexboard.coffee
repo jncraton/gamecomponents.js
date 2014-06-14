@@ -33,9 +33,6 @@ class HexBoard extends GameComponent
         
         @trigger('hexActivated', best_hex)
 
-    forEachHex: (cb) ->
-        ((cb(hexes[x][y]) for y in [0...@height-x%2]) for x in [0...@width])
-        
     getHex: (x,y) ->
         hexes[x][y]
 
