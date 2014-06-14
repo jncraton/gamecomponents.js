@@ -6,6 +6,10 @@ card_set = new CardSet()
 for i in [1..20]
     card_set.gain(i)
 
+card_set.addEventListener('cardActivated',(cardIndex) ->
+    console.log('Selected card ' + cardIndex)
+)
+
 console.log('total hexes', board.getHexes().length)
 
 players = ['red', 'green', 'blue', 'brown']

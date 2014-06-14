@@ -7,14 +7,18 @@ class CardSet extends GameComponent
     handlers = {}
     
     click: (e) ->
-        x = e.offsetX
-        y = e.offsetY
+        x = e.offsetX * (e.target.width / e.target.scrollWidth)
+        y = e.offsetY * (e.target.height / e.target.scrollHeight)
         
-        x = x / (card_width + 10)
-        y = (y - 300) / ((card_width * 1.5 + 10))
-        console.log(x, y)
+        x = Math.floor(x / (card_width + 10))
+        y = Math.floor((y - 300) / ((card_width * 1.5 + 10)))
+
+        card = x + y * 5
+        
+        if card >= 0 and card < hand.length and handlers['cardActivated']
+            handlers['cardActivated'](card, hand[card])
     
-    event: (name, cb) ->
+    addEventListener: (name, cb) ->
         handlers[name] = cb
     
     gain: (card) ->
