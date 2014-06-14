@@ -28,8 +28,6 @@ class HexBoard extends GameComponent
             best_dist = Math.sqrt((best_center[0]-e.cx)**2 + (best_center[1]-e.cy)**2)
             dist = Math.sqrt((center[0]-e.cx)**2 + (center[1]-e.cy)**2)
             
-            console.log(best_dist, dist, hex)
-            
             if dist < best_dist
                 best_hex = hex
         
