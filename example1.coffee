@@ -36,8 +36,6 @@ initPlayer = (x,y,color) ->
     
     player.prod_deck = new CardSet()
     player.prod_deck.gain({name:'Explorer'})
-    player.prod_deck.gain({name:'Solar Array'})
-    player.prod_deck.gain({name:'Salvager'})
     player.prod_deck.draw()
     player.prod_deck.draw()
     player.prod_deck.draw()
@@ -74,10 +72,8 @@ doTurn = (player) ->
             console.log('    ' + card.name)
         # Try exploring
         explorer = player.prod_deck.getHandCardByName('Explorer')
-        solar_array = player.prod_deck.getHandCardByName('Solar Array')
-        if explorer and solar_array
+        if explorer
             player.prod_deck.discard(explorer.handIndex)
-            player.prod_deck.discard(solar_array.handIndex)
             hexes = board.getHexes().sort (a, b) ->
                 return Math.random() - Math.random()
 
