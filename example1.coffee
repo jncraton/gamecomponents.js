@@ -59,9 +59,17 @@ doTurn = (player) ->
         player.prod_deck.discard(0)
         player.prod_deck.discard(0)
         player.prod_deck.discard(0)
-        player.prod_deck.draw()
-        player.prod_deck.draw()
-        player.prod_deck.draw()
+        if player.prod_deck.deck.length == 0
+            player.prod_deck.shuffle()
+        else if player.prod_deck.deck.length == 1
+            player.prod_deck.draw()
+        else if player.prod_deck.deck.length == 2
+            player.prod_deck.draw()
+            player.prod_deck.draw()
+        else
+            player.prod_deck.draw()
+            player.prod_deck.draw()
+            player.prod_deck.draw()
 
 
     if (player)
