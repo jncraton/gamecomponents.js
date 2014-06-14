@@ -1,9 +1,11 @@
 class CardSet extends GameComponent
-    deck = []
-    discard = []
-    hand = []
-    active = []
     card_width = 150
+    
+    constructor: ->
+        @deck = []
+        @discard = []
+        @hand = []
+        super()
     
     click: (e) ->
         x = Math.floor(e.cx / (card_width + 10))
@@ -11,28 +13,28 @@ class CardSet extends GameComponent
 
         card = x + y * 5
         
-        if card >= 0 and card < hand.length
-            hand[card].handIndex = card
-            @trigger('cardActivated', hand[card])
+        if card >= 0 and card < @hand.length
+            @hand[card].handIndex = card
+            @trigger('cardActivated', @hand[card])
 
     gain: (card) ->
-        discard.push(card)
+        @discard.push(card)
     
     shuffle: () ->
-        deck = deck.concat(discard).sort (a,b) -> 
+        @deck = @deck.concat(@discard).sort (a,b) -> 
             Math.random() - Math.random()
-        discard = []
+        @discard = []
     
-    discard: (pos) ->
-        if hand[pos]
-            discard.push(hand.splice(pos, 1)[0])
+    @discard: (pos) ->
+        if @hand[pos]
+            @discard.push(@hand.splice(pos, 1)[0])
 
     draw: () ->
-        if deck.length == 0
+        if @deck.length == 0
             @shuffle()
             
-        if deck.length > 0
-            hand.push(deck.pop())
+        if @deck.length > 0
+            @hand.push(@deck.pop())
 
     paintCard: (x, y, text = '') ->
         x += 5
@@ -50,9 +52,9 @@ class CardSet extends GameComponent
     paint: (canvas_id) ->
         @getContext(canvas_id)
         
-        @paintCard(0,0, "Deck (" + deck.length + ')')
-        @paintCard(card_width + 10,0, "Discard (" + discard.length + ')')
+        @paintCard(0,0, "Deck (" + @deck.length + ')')
+        @paintCard(card_width + 10,0, "Discard (" + @discard.length + ')')
 
-        for card, i in hand
+        for card, i in @hand
             @paintCard((card_width + 10) * (i % 5),300 + (card_width * 1.5 + 10) * Math.floor(i/5), card.text)
 (exports ? this).CardSet = CardSet
