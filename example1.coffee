@@ -1,4 +1,4 @@
-board_size = 9
+board_size = 5
 board = new HexBoard(board_size, board_size)
 
 for hex in board.getHexes()
@@ -28,6 +28,7 @@ initPlayer = (x,y,color) ->
     if (hex)
         hex.fill = color
         hex.note = 'POP'
+        hex.textColor = 'black'
         
     player = {
         color: color,
