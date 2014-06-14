@@ -6,9 +6,9 @@ card_set = new CardSet()
 for i in [1..20]
     card_set.gain(i)
 
-card_set.addEventListener('cardActivated', (card_index) ->
-    console.log('Selected card ' + card_index)
-    card_set.discard(card_index)
+card_set.addEventListener('cardActivated', (card) ->
+    console.log('Selected card ' + card.handIndex)
+    card_set.discard(card.handIndex)
     card_set.draw()
     card_set.paint('cards')
 )

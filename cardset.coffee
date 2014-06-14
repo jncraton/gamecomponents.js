@@ -4,7 +4,6 @@ class CardSet extends GameComponent
     hand = []
     active = []
     card_width = 150
-    handlers = {}
     
     click: (e) ->
         x = e.offsetX * (e.target.width / e.target.scrollWidth)
@@ -15,12 +14,10 @@ class CardSet extends GameComponent
 
         card = x + y * 5
         
-        if card >= 0 and card < hand.length and handlers['cardActivated']
-            handlers['cardActivated'](card, hand[card])
-    
-    addEventListener: (name, cb) ->
-        handlers[name] = cb
-    
+        if card >= 0 and card < hand.length
+            hand[card].handIndex = card
+            @trigger('cardActivated', hand[card])
+
     gain: (card) ->
         discard.push(card)
     

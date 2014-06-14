@@ -1,5 +1,14 @@
 class GameComponent
+    handlers = {}
+
     constructor: (@x_res = 1000, @y_res = 1000) ->
+    
+    addEventListener: (name, cb) ->
+        handlers[name] = cb
+    
+    trigger: (event_name, arg) ->
+        if handlers[event_name]
+            handlers[event_name](arg)
     
     getContext: (canvas_id) ->
         canvas = document.getElementById(canvas_id)
@@ -15,7 +24,8 @@ class GameComponent
         @context.lineWidth = 5
         
         if (@click)
-            canvas.addEventListener('click', @click)
+            canvas.removeEventListener(@click)
+            canvas.addEventListener('click', @click.bind(this))
         
         return @context
 
