@@ -14,7 +14,7 @@ for hex in board.getHexes()
         hex.note = 'HAZ'
 
 board.addEventListener('hexActivated', (hex) ->
-    hex.fill = 'gray'
+    hex.fill = ''
     board.paint('board')
 )
 
