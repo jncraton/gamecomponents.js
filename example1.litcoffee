@@ -30,7 +30,7 @@ Create a set of cards to play with:
 
     card_set = new CardSet()
     for i in [1..20]
-        card_set.gain(i)
+        card_set.gain({text: i})
 
 Create an event listener to discard cards on click:
 
@@ -66,9 +66,9 @@ Simulate some basic turns:
             turn += 1
             board.paint('board')
             
+            card_set.discard(Math.floor(Math.random() * 10))
+            card_set.discard(Math.floor(Math.random() * 10))
             card_set.draw()
-            card_set.discard(Math.floor(Math.random() * 10))
-            card_set.discard(Math.floor(Math.random() * 10))
             card_set.paint('cards')
         , 20)
 

@@ -19,13 +19,13 @@ class CardSet extends GameComponent
         discard.push(card)
     
     shuffle: () ->
-        deck = deck.concat(discard).sort -> 
+        deck = deck.concat(discard).sort (a,b) -> 
             Math.random() - Math.random()
         discard = []
     
     discard: (pos) ->
         if hand[pos]
-            discard.push(hand.splice(pos, 1))
+            discard.push(hand.splice(pos, 1)[0])
 
     draw: () ->
         if deck.length == 0
@@ -54,5 +54,5 @@ class CardSet extends GameComponent
         @paintCard(card_width + 10,0, "Discard (" + discard.length + ')')
 
         for card, i in hand
-            @paintCard((card_width + 10) * (i % 5),300 + (card_width * 1.5 + 10) * Math.floor(i/5), card)
+            @paintCard((card_width + 10) * (i % 5),300 + (card_width * 1.5 + 10) * Math.floor(i/5), card.text)
 (exports ? this).CardSet = CardSet
