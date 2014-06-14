@@ -1,7 +1,7 @@
 w = 9
 h = 9
 
-board = new HexBoard(w, h, 1000, 1000)
+board = new HexBoard(w, h)
 card_set = new CardSet()
 for i in [1..20]
     card_set.gain(i)

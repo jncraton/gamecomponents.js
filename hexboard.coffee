@@ -1,7 +1,7 @@
 class HexBoard extends GameComponent
     hexes = []
 
-    constructor: (@width, @height, @x_res = 2000, @y_res = 2000) ->
+    constructor: (@width, @height, @x_res = 1000, @y_res = 1000) ->
         hexes = (({'x': x, 'y': y} for y in [0...@height-x%2]) for x in [0...@width])
     
     forEachHex: (cb) ->
