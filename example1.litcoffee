@@ -1,9 +1,7 @@
 Begin by creating a 9x9 hex board:
 
-    w = 9
-    h = 9
-
-    board = new HexBoard(w, h)
+    board_size = 9
+    board = new HexBoard(board_size, board_size)
 
 Populate the board with different types of hexes
 
@@ -54,9 +52,9 @@ Create the starting players:
             hex.note = 'POP'
 
     setStart(0,0,'red')
-    setStart(0,h-1,'green')
-    setStart(w-1,0,'blue')
-    setStart(w-1,h-1,'brown')
+    setStart(0,board_size-1,'green')
+    setStart(board_size-1,0,'blue')
+    setStart(board_size-1,board_size-1,'brown')
 
 Simulate some basic turns:
 
