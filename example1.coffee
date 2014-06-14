@@ -35,9 +35,9 @@ initPlayer = (x,y,color) ->
     }
     
     player.prod_deck = new CardSet()
-    player.prod_deck.gain({text:'POP'})
-    player.prod_deck.gain({text:'MAT'})
-    player.prod_deck.gain({text:'ENERGY'})
+    player.prod_deck.gain({name:'Explorer'})
+    player.prod_deck.gain({name:'Solar Array'})
+    player.prod_deck.gain({name:'Salvager'})
     player.prod_deck.draw()
     player.prod_deck.draw()
     player.prod_deck.draw()
@@ -60,15 +60,20 @@ doTurn = (player) ->
 
     if (player)
         # Try exploring
-        hexes = board.getHexes().sort (a, b) ->
-            return Math.random() - Math.random()
+        explorer = player.prod_deck.getHandCardByName('Explorer')
+        solar_array = player.prod_deck.getHandCardByName('Solar Array')
+        if explorer and solar_array
+            player.prod_deck.discard(explorer.handIndex)
+            player.prod_deck.discard(solar_array.handIndex)
+            hexes = board.getHexes().sort (a, b) ->
+                return Math.random() - Math.random()
 
-        for hex in hexes
-            if (hex.fill == player.color)
-                for hex in board.getAdjacent(hex)
-                    if (!hex.fill) 
-                        hex.fill = player.color
-                        return
+            for hex in hexes
+                if (hex.fill == player.color)
+                    for hex in board.getAdjacent(hex)
+                        if (!hex.fill) 
+                            hex.fill = player.color
+                            return
         
         clearTimeout(timer)
         console.log('no move for ' + player.color)

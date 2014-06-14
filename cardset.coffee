@@ -3,7 +3,7 @@ class CardSet extends GameComponent
     
     constructor: ->
         @deck = []
-        @discard = []
+        @discardPile = []
         @hand = []
         super()
     
@@ -18,16 +18,23 @@ class CardSet extends GameComponent
             @trigger('cardActivated', @hand[card])
 
     gain: (card) ->
-        @discard.push(card)
+        @discardPile.push(card)
     
     shuffle: () ->
-        @deck = @deck.concat(@discard).sort (a,b) -> 
+        @deck = @deck.concat(@discardPile).sort (a,b) -> 
             Math.random() - Math.random()
-        @discard = []
+        @discardPile = []
     
-    @discard: (pos) ->
+    getHandCardByName: (name) ->
+        for card, i in @hand
+            if card.name == name
+                card.handIndex = i
+                return card
+        return null
+    
+    discard: (pos) ->
         if @hand[pos]
-            @discard.push(@hand.splice(pos, 1)[0])
+            @discardPile.push(@hand.splice(pos, 1)[0])
 
     draw: () ->
         if @deck.length == 0
@@ -36,7 +43,7 @@ class CardSet extends GameComponent
         if @deck.length > 0
             @hand.push(@deck.pop())
 
-    paintCard: (x, y, text = '') ->
+    paintCard: (x, y, card) ->
         x += 5
         y += 5
     
@@ -47,14 +54,14 @@ class CardSet extends GameComponent
             [x+card_width, y]
         ])
         
-        @context.fillText(text, x+card_width/2, y+card_width/2)
+        @context.fillText(card.name, x+card_width/2, y+card_width/2)
 
     paint: (canvas_id) ->
         @getContext(canvas_id)
         
-        @paintCard(0,0, "Deck (" + @deck.length + ')')
-        @paintCard(card_width + 10,0, "Discard (" + @discard.length + ')')
-
+        @paintCard(0,0, {name: "Deck (" + @deck.length + ')'})
+        @paintCard(card_width + 10,0, {name: "Discard (" + @discardPile.length + ')'})
+        
         for card, i in @hand
-            @paintCard((card_width + 10) * (i % 5),300 + (card_width * 1.5 + 10) * Math.floor(i/5), card.text)
+            @paintCard((card_width + 10) * (i % 5),300 + (card_width * 1.5 + 10) * Math.floor(i/5), card)
 (exports ? this).CardSet = CardSet
