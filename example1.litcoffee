@@ -5,6 +5,20 @@ Begin by creating a 9x9 hex board:
 
     board = new HexBoard(w, h)
 
+Populate the board with different types of hexes
+
+    for hex in board.getHexes()
+        if Math.random() > (5/80)
+            if Math.random() > .5
+                if Math.random() > .5
+                    hex.note = 'POP'
+                else
+                    hex.note = 'MAT'
+        else
+            hex.fill = 'black'
+            hex.textColor = 'white'
+            hex.note = 'HAZ'
+
 Add a basic event listener on hex activation (clicks):
 
     board.addEventListener('hexActivated', (hex) ->
@@ -66,17 +80,7 @@ Simulate some basic turns:
                 if (hex.fill == color)
                     for hex in board.getAdjacent(hex)
                         if (!hex.fill) 
-                            if Math.random() > (5/80)
-                                hex.fill = color
-                                if Math.random() > .5
-                                    if Math.random() > .5
-                                        hex.note = 'POP'
-                                    else
-                                        hex.note = 'MAT'
-                            else
-                                hex.fill = 'black'
-                                hex.textColor = 'white'
-                                hex.note = 'HAZ'
+                            hex.fill = color
                             return
             
             clearTimeout(timer)
