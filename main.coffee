@@ -6,8 +6,11 @@ card_set = new CardSet()
 for i in [1..20]
     card_set.gain(i)
 
-card_set.addEventListener('cardActivated',(cardIndex) ->
-    console.log('Selected card ' + cardIndex)
+card_set.addEventListener('cardActivated', (card_index) ->
+    console.log('Selected card ' + card_index)
+    card_set.discard(card_index)
+    card_set.draw()
+    card_set.paint('cards')
 )
 
 console.log('total hexes', board.getHexes().length)
