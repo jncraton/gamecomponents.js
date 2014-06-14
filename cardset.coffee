@@ -6,11 +6,8 @@ class CardSet extends GameComponent
     card_width = 150
     
     click: (e) ->
-        x = e.offsetX * (e.target.width / e.target.scrollWidth)
-        y = e.offsetY * (e.target.height / e.target.scrollHeight)
-        
-        x = Math.floor(x / (card_width + 10))
-        y = Math.floor((y - 300) / ((card_width * 1.5 + 10)))
+        x = Math.floor(e.cx / (card_width + 10))
+        y = Math.floor((e.cy - 300) / ((card_width * 1.5 + 10)))
 
         card = x + y * 5
         

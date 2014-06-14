@@ -25,7 +25,11 @@ class GameComponent
             @context.lineWidth = 5
             
             if (@click)
-                canvas.addEventListener('click', @click.bind(this))
+                canvas.addEventListener('click', ((e) -> 
+                    e.cx = e.offsetX * (e.target.width / e.target.scrollWidth)
+                    e.cy = e.offsetY * (e.target.height / e.target.scrollHeight)
+                    @click(e)
+                ).bind(this))
         
         @context.clearRect(0, 0, @x_res, @y_res);
             
