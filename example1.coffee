@@ -38,8 +38,6 @@ initPlayer = (x,y,color) ->
     player.prod_deck = new CardSet()
     player.prod_deck.gain({name:'Explorer'})
     player.prod_deck.draw()
-    player.prod_deck.draw()
-    player.prod_deck.draw()
     
     players.push(player)
 
