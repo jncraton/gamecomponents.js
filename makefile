@@ -1,10 +1,7 @@
-all: example1.js gamecomponents.js
+all: dist/gamecomponents.js
 
-%.js: %.coffee
-	coffee -c $^
+build/%.js: src/%.coffee
+	coffee -o build -c $^
 
-%.js: %.litcoffee
-	coffee -c $^
-
-gamecomponents.js: gamecomponent.js hexboard.js cardset.js
+dist/gamecomponents.js: build/gamecomponent.js build/hexboard.js build/cardset.js
 	cat $^ > $@
