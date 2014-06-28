@@ -21,10 +21,16 @@ class CardSet extends GameComponent
         @discardPile.push(card)
     
     shuffle: () ->
-        @deck = @deck.concat(@discardPile).sort (a,b) -> 
-            Math.random() - Math.random()
+        @deck = @deck.concat(@discardPile)
         @discardPile = []
-    
+        
+        tmp = []
+        
+        for i in [0...@deck.length]
+            tmp.push(@deck.splice(Math.random() * @deck.length, 1)[0])
+                
+        @deck = tmp
+        
     getHandCardByName: (name) ->
         for card, i in @hand
             if card.name == name
