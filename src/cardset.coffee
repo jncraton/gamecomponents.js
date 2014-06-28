@@ -42,6 +42,10 @@ class CardSet extends GameComponent
         if @hand[pos]
             @discardPile.push(@hand.splice(pos, 1)[0])
 
+    trash: (pos) ->
+        if @hand[pos]
+            @hand.splice(pos, 1)
+
     draw: () ->
         if @deck.length == 0
             @shuffle()
