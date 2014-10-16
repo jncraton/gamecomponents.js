@@ -6,7 +6,7 @@ class HexBoard extends GameComponent
     COS30 = 0.86602540378
 
     constructor: (@width, @height, @x_res = 1000, @y_res = 1000) ->
-        hexes = (({'x': x, 'y': y} for y in [0...@height-x%2]) for x in [0...@width])
+        hexes = (({'x': x, 'y': y, 'contents': []} for y in [0...@height-x%2]) for x in [0...@width])
 
     getHexes: () ->
         [].concat.apply([], hexes)
