@@ -57,7 +57,10 @@ class HexBoard extends GameComponent
         push(x-1, y + 1 + (-2) * ((x + 1) % 2))
 
         return ret
-        
+    
+    distanceBetween: (a,b) ->
+        return Math.sqrt((a.x-b.x)*(a.x-b.x) + (a.y-b.y)*(a.y-b.y))
+    
     paint: (canvas_id) ->
         context = @getContext(canvas_id)
         
