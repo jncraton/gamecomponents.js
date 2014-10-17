@@ -10,6 +10,12 @@ class GameComponent
         if handlers[event_name]
             handlers[event_name](arg)
     
+    clickHandler: (e) ->
+        if (@click)
+                e.cx = e.offsetX * (e.target.width / e.target.scrollWidth)
+                e.cy = e.offsetY * (e.target.height / e.target.scrollHeight)
+                @click(e)
+    
     getContext: (canvas_id) ->
         if @canvasId != canvas_id
             @canvasId = canvas_id
@@ -24,12 +30,7 @@ class GameComponent
             @context.strokeStyle = "black"
             @context.lineWidth = 5
             
-            if (@click)
-                canvas.addEventListener('click', ((e) -> 
-                    e.cx = e.offsetX * (e.target.width / e.target.scrollWidth)
-                    e.cy = e.offsetY * (e.target.height / e.target.scrollHeight)
-                    @click(e)
-                ).bind(this))
+            canvas.addEventListener('click', @clickHandler)
         
         @context.clearRect(0, 0, @x_res, @y_res);
             
