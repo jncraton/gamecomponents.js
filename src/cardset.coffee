@@ -17,6 +17,9 @@ class CardSet extends GameComponent
             @hand[card].handIndex = card
             @trigger('cardActivated', @hand[card])
 
+    numCards: ->
+        return @deck.length + @discardPile.length + @hand.length
+
     gain: (card) ->
         @discardPile.push(card)
     
