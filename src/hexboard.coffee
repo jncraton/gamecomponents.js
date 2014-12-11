@@ -5,7 +5,13 @@ class HexBoard extends GameComponent
     SIN30 = .5
     COS30 = 0.86602540378
 
-    constructor: (@width, @height, @x_res = 1000, @y_res = 1000) ->
+    constructor: (@width, @height, @x_res, @y_res) ->
+        if !@y_res
+            @y_res = @height * 590 + 300
+
+        if !@x_res
+            @x_res = @width * 675 + 300
+    
         hexes = (({'x': x, 'y': y, 'contents': []} for y in [0...@height-x%2]) for x in [0...@width])
 
     getHexes: () ->
@@ -99,6 +105,7 @@ class HexBoard extends GameComponent
             context.stroke()
             
             context.fillStyle = hex.textColor or "black"
+            context.font = '72pt Sans';
             context.fillText(hex.note or '', center[0], center[1])
         
 (exports ? this).HexBoard = HexBoard
