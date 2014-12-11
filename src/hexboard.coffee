@@ -102,6 +102,7 @@ class HexBoard extends GameComponent
                 context.fill()
                 
             context.strokeStyle = hex.border or "black"
+            context.lineWidth = 15
             context.stroke()
             
             context.fillStyle = hex.textColor or "black"
