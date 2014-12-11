@@ -83,10 +83,18 @@ class HexBoard extends GameComponent
                 [center[0] - x_offset, center[1] + y_offset]
                 [center[0] - hex_radius, center[1]]
             ])
-            
-            context.fillStyle = hex.fill or "gray"
-            context.fill()
-            
+
+            if hex.img
+                context.save();
+
+                context.clip()
+                context.drawImage(hex.img, center[0] - hex_radius, center[1] - hex_radius);
+                
+                context.restore();
+            else
+                context.fillStyle = hex.fill or "gray"
+                context.fill()
+                
             context.strokeStyle = hex.border or "black"
             context.stroke()
             
