@@ -97,7 +97,8 @@ class HexBoard extends GameComponent
                 context.drawImage(hex.img, center[0] - hex_radius, center[1] - hex_radius);
                 
                 context.restore();
-            else
+            
+            if hex.fill
                 context.fillStyle = hex.fill or "gray"
                 context.fill()
                 
